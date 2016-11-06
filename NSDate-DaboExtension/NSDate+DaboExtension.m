@@ -506,18 +506,33 @@
 //根据NSDateFmtWithFormatter返回对应的格式化字符串
 + (NSString *)formatterStr:(NSDateFmtWithFormatter)NSDateFmt
 {
-    NSArray *formatterArr = @[
-                              @"YYYY-MM",
-                              @"YYYY-MM-dd",
-                              @"YYYY-MM-dd HH:mm:ss",
-                              @"MM-dd HH:mm",
-                              @"HH:mm",
-                              @"YY年MM月",
-                              @"MM月dd日 HH:mm",
-                              @"YYYY年MM月dd日 HH:mm"
-                              ];
-    
-    return formatterArr[NSDateFmt];
+    switch (NSDateFmt)
+    {
+        case NSDateFmtYYYYMM:
+            return @"YYYY-MM";
+            break;
+        case NSDateFmtYYYYMMdd:
+            return @"YYYY-MM-dd";
+            break;
+        case NSDateFmtYYYYMMddHHmmss:
+            return @"YYYY-MM-dd HH:mm:ss";
+            break;
+        case NSDateFmtMMddHHmm:
+            return @"MM-dd HH:mm";
+            break;
+        case NSDateFmtHHmm:
+            return @"HH:mm";
+            break;
+        case NSDateFmtYYMMChinese:
+            return @"YY年MM月";
+            break;
+        case NSDateFmtMMddHHmmChinese:
+            return @"MM月dd日 HH:mm";
+            break;
+        case NSDateFmtYYYYMMddHHmmChiness:
+            return @"YYYY年MM月dd日 HH:mm";
+            break;
+    }
 }
 
 @end
