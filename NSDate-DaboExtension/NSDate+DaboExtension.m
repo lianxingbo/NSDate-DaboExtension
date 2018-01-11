@@ -290,7 +290,7 @@
     NSDateComponents *Compareday = self.components;
     NSDateComponents *Yesterday = yesterday.components;
     NSDateComponents *Today = [NSDate date].components;
-
+    
     NSString *hour = [NSDate stringFromDate:self andNSDateFormatter:@"HH"];
     NSString *minute = [NSDate stringFromDate:self andNSDateFormatter:@"mm"];
     NSString *sunormoon = @"";
@@ -444,21 +444,21 @@
 
 //  -------------------------- Compare ---------------------------
 
-//两个时间比较返回NSDateComponents
+//两个时间比较 根据NSCalendarUnit 返回NSDateComponents
 + (NSDateComponents *)dateComponents:(NSCalendarUnit)unit fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
 {
     return [fromDate.calendar components:unit fromDate:fromDate toDate:toDate options:0];
 }
 
 //两个时间之间相差几天 可以根据需求返回相差几月、几周、几年
-+ (int)getDayNumbertoDay:(NSDate *)today beforDay:(NSDate *)beforday
-{
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:today toDate:beforday options:0];
-    //  NSDateComponents *components = [calendar components:NSMonthCalendarUnit|NSDayCalendarUnit fromDate:today toDate:beforday options:0];
-    int day = (int)[components day];//两个日历之间相差多少月//    NSInteger days = [components month];//两个之间相差几月
-    return day;
-}
+//+ (int)getDayNumbertoDay:(NSDate *)today beforDay:(NSDate *)beforday
+//{
+//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:today toDate:beforday options:0];
+//    //  NSDateComponents *components = [calendar components:NSMonthCalendarUnit|NSDayCalendarUnit fromDate:today toDate:beforday options:0];
+//    int day = (int)[components day];//两个日历之间相差多少月//    NSInteger days = [components month];//两个之间相差几月
+//    return day;
+//}
 
 //  -------------------------- Private Method ---------------------------
 
@@ -506,33 +506,18 @@
 //根据NSDateFmtWithFormatter返回对应的格式化字符串
 + (NSString *)formatterStr:(NSDateFmtWithFormatter)NSDateFmt
 {
-    switch (NSDateFmt)
-    {
-        case NSDateFmtYYYYMM:
-            return @"YYYY-MM";
-            break;
-        case NSDateFmtYYYYMMdd:
-            return @"YYYY-MM-dd";
-            break;
-        case NSDateFmtYYYYMMddHHmmss:
-            return @"YYYY-MM-dd HH:mm:ss";
-            break;
-        case NSDateFmtMMddHHmm:
-            return @"MM-dd HH:mm";
-            break;
-        case NSDateFmtHHmm:
-            return @"HH:mm";
-            break;
-        case NSDateFmtYYMMChinese:
-            return @"YY年MM月";
-            break;
-        case NSDateFmtMMddHHmmChinese:
-            return @"MM月dd日 HH:mm";
-            break;
-        case NSDateFmtYYYYMMddHHmmChiness:
-            return @"YYYY年MM月dd日 HH:mm";
-            break;
-    }
+    NSArray *formatterArr = @[
+                              @"yyyy-MM",
+                              @"yyyy-MM-dd",
+                              @"yyyy-MM-dd HH:mm:ss",
+                              @"MM-dd HH:mm",
+                              @"HH:mm",
+                              @"yy年MM月",
+                              @"MM月dd日 HH:mm",
+                              @"yyyy年MM月dd日 HH:mm"
+                              ];
+    
+    return formatterArr[NSDateFmt];
 }
 
 @end
