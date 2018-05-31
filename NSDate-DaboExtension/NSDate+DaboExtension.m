@@ -20,7 +20,12 @@
 //是否为本月
 - (BOOL)isThisMonth
 {
-    return [self.calendar components:NSCalendarUnitMonth|NSCalendarUnitDay fromDate:self.ymdDate toDate:[NSDate date].ymdDate options:0].month == 0;
+    if (self.isThisYear) {
+        if (self.month == [NSDate date].month) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 //是否为昨天
@@ -66,6 +71,16 @@
 - (BOOL)sameYearWithDate:(NSDate *)otherDate
 {
     return self.year == otherDate.year;
+}
+
+//判断是否是本月多少号之后 ps：判断本月25号之后
++ (BOOL)thisMonthDayAfter:(NSInteger)day{
+    NSDate *nowDate = [NSDate date];
+    NSDate *date26 = [NSDate dateWithYear:nowDate.year Month:nowDate.month Day:26 Hour:0 Minute:0 Second:0];
+    if([nowDate compare:date26] == NSOrderedDescending){//降序 比day日靠后
+        return YES;
+    }
+    return NO;
 }
 
 /*

@@ -54,6 +54,9 @@ typedef NS_ENUM(NSInteger,NSDateFmtWithFormatter)
 //判断与某一天是否为同一年
 - (BOOL)sameYearWithDate:(NSDate *)otherDate;
 
+//判断是否是本月多少号之后 ps：判断本月25号之后
++ (BOOL)thisMonthDayAfter:(NSInteger)day;
+
 /*
  "16:26",
  "昨天16:26",
